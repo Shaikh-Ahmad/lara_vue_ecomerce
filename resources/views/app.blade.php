@@ -14,6 +14,14 @@
 <body>
     <div class="container">
         <div id="app">
+            <header>
+                <div>
+                    <nav>
+                        <router-link :to="{name: 'products.index'}"> Products </router-link>
+                    </nav>
+                    <router-link :to="{name: 'order.checkout'}"> Checkout <span v-text="'(' + $store.state.cart.length + ' items)'"></span> </router-link>
+                </div>
+            </header>
             <router-view></router-view>
         </div>
     </div>

@@ -12,7 +12,7 @@
               </router-link>
               <div class="text-center">
                 <p v-text="product.name"></p>
-                <p v-text="product.price"></p>
+                <p v-text="formateCurrency(product.price)"></p>
               </div>
             </div>
           </div>
@@ -27,8 +27,13 @@
       products() {
         return this.$store.state.products;
       }
+    },
+    methods:{
+      formateCurrency(price){
+      price = (price / 100);
+      return price.toLocaleString('en-US' , {style : 'currency' , currency:'USD' })
     }
-
+    }
   }
 </script>
 

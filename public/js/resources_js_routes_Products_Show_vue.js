@@ -15,7 +15,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  methods: {
+    formateCurrency: function formateCurrency(price) {
+      price = price / 100;
+      return price.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      });
+    }
+  },
+  computed: {
+    products: function products() {
+      return this.$store.state.products;
+    },
+    product: function product() {
+      var _this = this;
+
+      return this.products.find(function (product) {
+        return product.slug == _this.$route.params.slug;
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -107,7 +143,58 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h2", [_vm._v("A product")])
+  return _c("section", [
+    _c("h2", [_vm._v("A product")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card m-2" }, [
+      _c("img", {
+        staticClass: "rounded mx-auto d-block",
+        attrs: { width: "225x", height: "200px" }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "text-center" },
+        [
+          _c("p", { domProps: { textContent: _vm._s(_vm.product.name) } }),
+          _vm._v(" "),
+          _c("p", {
+            domProps: {
+              textContent: _vm._s(_vm.formateCurrency(_vm.product.price))
+            }
+          }),
+          _vm._v(" "),
+          _vm._l(_vm.product.categories, function(category) {
+            return _c("p", {
+              key: category.id,
+              domProps: { textContent: _vm._s(category.name) }
+            })
+          }),
+          _vm._v(" "),
+          _c("p", {
+            staticClass: "p-4",
+            domProps: { textContent: _vm._s(_vm.product.description) }
+          })
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "button",
+          {
+            attrs: { onclick: "This item was added to cart" },
+            on: {
+              click: function($event) {
+                return _vm.$store.commit("addToCart", _vm.product)
+              }
+            }
+          },
+          [_vm._v("Add to cart")]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

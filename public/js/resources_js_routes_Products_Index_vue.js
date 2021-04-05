@@ -39,6 +39,15 @@ __webpack_require__.r(__webpack_exports__);
     products: function products() {
       return this.$store.state.products;
     }
+  },
+  methods: {
+    formateCurrency: function formateCurrency(price) {
+      price = price / 100;
+      return price.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      });
+    }
   }
 });
 
@@ -172,7 +181,11 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("p", {
-                          domProps: { textContent: _vm._s(product.price) }
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.formateCurrency(product.price)
+                            )
+                          }
                         })
                       ])
                     ],

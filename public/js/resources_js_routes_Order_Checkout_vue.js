@@ -15,7 +15,85 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      customer: {
+        first_name: '',
+        last_name: '',
+        email: '',
+        city: '',
+        state: '',
+        zipcode: ''
+      }
+    };
+  },
+  methods: {
+    cartLineTotal: function cartLineTotal(item) {
+      var price = item.price * item.quantity;
+      price = price / 100;
+      return price.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      });
+    }
+  },
+  computed: {
+    cart: function cart() {
+      return this.$store.state.cart;
+    },
+    cartQuantity: function cartQuantity() {
+      return this.cart.reduce(function (acc, item) {
+        return acc + item.quantity;
+      }, 0);
+    },
+    cartTotal: function cartTotal() {
+      var price = this.cart.reduce(function (acc, item) {
+        return acc + item.price * item.quantity;
+      }, 0);
+      price = price / 100;
+      return price.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -107,9 +185,74 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h3", [_vm._v("This is the check out")])
+  return _c("section", [
+    _c("div", [
+      _c("h3", [_vm._v("This is the check out")]),
+      _vm._v(" "),
+      _c("table", { staticClass: "table table-striped" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          [
+            _vm._l(_vm.cart, function(item) {
+              return _c("tr", { key: item.id }, [
+                _c("td", { domProps: { textContent: _vm._s(item.name) } }),
+                _vm._v(" "),
+                _c("td", { domProps: { textContent: _vm._s(item.quantity) } }),
+                _vm._v(" "),
+                _c("td", {
+                  domProps: { textContent: _vm._s(_vm.cartLineTotal(item)) }
+                }),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      on: {
+                        click: function($event) {
+                          return _vm.$store.commit("removeFromCart", item)
+                        }
+                      }
+                    },
+                    [_vm._v("Remove")]
+                  )
+                ])
+              ])
+            }),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Total Ammount")]),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(_vm.cartQuantity) } }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(_vm.cartTotal) } })
+            ])
+          ],
+          2
+        )
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Item")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Quantity")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Price")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
